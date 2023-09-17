@@ -1,0 +1,79 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int sort(const void* a , const void* b)
+{
+    return (*(int*)a - *(int*)b);
+}
+int* findDuplicates(int* nums, int numsSize, int* returnSize){
+    qsort(nums,numsSize,sizeof(int),sort);
+    int* arr = (int*)malloc(sizeof(int)*numsSize);
+    *returnSize = 0;
+    for( int i = 0 ; i < numsSize-1 ; i++)
+        if(nums[i] == nums[i+1])
+            arr[(*returnSize)++] = nums[i];
+    return arr;
+}
+
+
+
+--------------------------------------------------------------------------------------------
+
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int sort(const void* a , const void* b)
+{
+    return (*(int*)a - *(int*)b);
+}
+int* findDuplicates(int* nums, int numsSize, int* returnSize){
+    qsort(nums,numsSize,sizeof(int),sort);
+    int j = 0;
+    for( int i = 0 ; i < numsSize-1 ; i++)
+        if(nums[i] == nums[i+1])
+            nums[j++] = nums[i];
+    *returnSize = j;
+    return nums;
+}
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* findDuplicates(int* nums, int numsSize, int* returnSize){
+    int j = 0;
+    for( int i = 0 ; i < numsSize ; i++)
+    {
+        for( int z = i+1 ; z < numsSize ; z++)
+            if(nums[i] == nums[z])
+                nums[j++] = nums[i];
+    }
+    *returnSize = j;
+    return nums;
+}
+
+
+
+----------------------------------------------------------------------------------------------
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* findDuplicates(int* nums, int numsSize, int* returnSize){
+    int j = 0 , arr[1000001] = {0};
+    for( int i = 0 ; i < numsSize ; i++)
+        arr[nums[i]]++;
+    for( int i = 0 ; i < 1000001 ; i++)
+        if(arr[i] == 2)
+            nums[j++] = i;
+    *returnSize = j;
+    return nums;
+}
